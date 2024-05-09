@@ -1,1 +1,12 @@
-spring.application.name=projet9microservicegateway
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: microservicepatient
+          uri: http://localhost:8081/
+          predicates:
+          - Path=/patient/**
+

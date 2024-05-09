@@ -9,18 +9,23 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.openclassrooms</groupId>
-	<artifactId>projet9microservicegateway</artifactId>
+	<artifactId>projet9microservicefront</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projet9microservicegateway</name>
-	<description>Projet 9 microservice gateway</description>
+	<name>projet9microservicefront</name>
+	<description>Projet 9 microservice front</description>
 	<properties>
 		<java.version>22</java.version>
-		<spring-cloud.version>2023.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -28,18 +33,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>

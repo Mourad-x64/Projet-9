@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Patient</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="row col-md-8 offset-md-2">
+
+    <div class="container border mt-5">
+        <a th:href="@{/patient/}"> <- Back </a>
+        <div class="container mt-5 mb-5">
+
+        <h4>Lastname : <span th:text="${patient.nom}"></span></h4>
+        <h4>Firstname : <span th:text="${patient.prenom}"></span></h4>
+        <h4>Gender : <span th:text="${patient.genre}"></span></h4>
+        <h4>Date Of Birth : <span th:text="${patient.dateNaissance}"></span></h4>
+        <h4>Adress : <span th:text="${patient.adresse}"></span></h4>
+        <h4>Phone : <span th:text="${patient.telephone}"></span></h4>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
