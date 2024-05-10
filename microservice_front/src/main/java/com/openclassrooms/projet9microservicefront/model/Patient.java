@@ -1,5 +1,6 @@
 package com.openclassrooms.projet9microservicefront.model;
 
+
 public class Patient {
 
     private int id;
@@ -9,7 +10,6 @@ public class Patient {
     private String genre;
     private String adresse;
     private String telephone;
-
 
 
     public int getId() {
@@ -67,6 +67,4 @@ public class Patient {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
-
 }

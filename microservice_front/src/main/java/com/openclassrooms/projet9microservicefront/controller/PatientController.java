@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 
 @Controller
@@ -22,26 +23,45 @@ public class PatientController {
 
 
     @GetMapping("/")
-    public String getAll(Model model){
+    public String getAllPatients(Model model){
 
         model.addAttribute("patients", patientService.getAllPatients());
 
         return "patients_list";
     }
 
-    @GetMapping("/{id}")
-    public String get(@PathVariable int id, Model model){
+    @GetMapping("/add")
+    public String addPatientForm(Model model) {
+        model.addAttribute("patient", new Patient());
+        return "patient";
+    }
+
+    @PostMapping("/add")
+    public String addPatient(@ModelAttribute("patient") Patient patient) {
+        patientService.addPatient(patient);
+        return "redirect:/patient/";
+    }
+
+    @GetMapping("edit/{id}")
+    public String updatePatientForm(@PathVariable int id, Model model){
 
         model.addAttribute("patient", patientService.getPatient(id));
 
         return "patient";
     }
 
-    @PostMapping("/{id}")
-    public String update(@PathVariable("id") int id, @ModelAttribute("patient") Patient patient) throws JsonProcessingException {
+    @PostMapping("edit/{id}")
+    public String updatePatient(@PathVariable("id") int id, Model model, @ModelAttribute("patient") Patient patient){
 
         patientService.updatePatient(id, patient);
-        //System.out.println("test");
+
+        return "redirect:/patient/";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deletePatient(@PathVariable("id") int id){
+
+        patientService.deletePatient(id);
 
         return "redirect:/patient/";
     }

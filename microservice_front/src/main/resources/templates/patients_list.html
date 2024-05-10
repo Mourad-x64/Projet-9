@@ -11,8 +11,6 @@
     <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
     <!-- Font Awesome CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
-    <!-- Custom style -->
-    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/static/Style.css}">
 </head>
 <body>
 <div class="row col-md-8 offset-md-2">
@@ -25,6 +23,11 @@
             <h1 class="text-center">no patients !</h1>
         </div>
 
+        <div class="container mt-5">
+            <a th:href="@{/patient/add}">Add Patient</a>
+        </div>
+
+
         <div  class="container mt-5" th:if="${not#lists.isEmpty(patients)}">
             <table id="friends" class="table table-striped">
                 <thead>
@@ -32,7 +35,8 @@
                     <th>Lastname</th>
                     <th>Firstname</th>
                     <th>Gender</th>
-                    <th>Link</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,7 +44,8 @@
                     <td th:text="${patient.nom}"></td>
                     <td th:text="${patient.prenom}"></td>
                     <td th:text="${patient.genre}"></td>
-                    <td align="right"><a th:href="@{/patient/{id}(id = ${patient.id})}">Show</a></td>
+                    <td align="right"><a th:href="@{/patient/edit/{id}(id = ${patient.id})}">Edit</a></td>
+                    <td align="right"><a th:href="@{/patient/delete/{id}(id = ${patient.id})}">Delete</a></td>
                 </tr>
                 </tbody>
                 <tfoot>
@@ -48,7 +53,8 @@
                     <th>Lastname</th>
                     <th>Firstname</th>
                     <th>Gender</th>
-                    <th>Link</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 </tfoot>
             </table>

@@ -1,43 +1,47 @@
 package com.openclassrooms.projet9microservicefront.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.openclassrooms.projet9microservicefront.model.Patient;
 import com.openclassrooms.projet9microservicefront.model.Uri;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.io.DataInput;
+
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class PatientService {
 
-    public List<Object> getAllPatients(){
+    public List<Patient> getAllPatients(){
         RestTemplate restTemplate = new RestTemplate();
-        Object[] patients = restTemplate.getForObject(Uri.ALL_PATIENTS, Object[].class);
+        Patient[] patients = restTemplate.getForObject(Uri.ALL_PATIENTS, Patient[].class);
 
         return Arrays.asList(patients);
     }
 
     public Object getPatient(int id){
         RestTemplate restTemplate = new RestTemplate();
-        Object patient = restTemplate.getForObject(Uri.PATIENT+id, Object.class);
+        Object patient = restTemplate.getForObject(Uri.GET_PATIENT+id, Patient.class);
 
         return patient;
     }
 
-    public Object updatePatient(int id, Patient patient) throws JsonProcessingException {
-
-        //ObjectMapper mapper = new ObjectMapper();
-        //Patient patientObject = mapper.readValue(patient, Patient.class);
-
+    public Object addPatient(Patient patient){
         RestTemplate restTemplate = new RestTemplate();
-        Object response = restTemplate.postForObject(Uri.PATIENT+id, patient, Object.class);
+        Patient response = restTemplate.postForObject(Uri.ADD_PATIENT, patient, Patient.class);
 
-        return response;
+        return patient;
+    }
+
+    public void updatePatient(int id, Patient patient){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(Uri.UPDATE_PATIENT+id, patient);
+    }
+
+    public void deletePatient(int id){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(Uri.DELETE_PATIENT+id);
     }
 }
