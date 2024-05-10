@@ -31,7 +31,7 @@ public class PatientController {
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable("id") int id, @RequestBody Patient patient){
+    public String update(@PathVariable("id") int id, @RequestBody Patient patient) throws JsonProcessingException {
         return patientService.update(id, patient);
     }
 

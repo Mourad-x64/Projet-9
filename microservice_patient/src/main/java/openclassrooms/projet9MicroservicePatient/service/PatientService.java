@@ -24,13 +24,15 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public String update(int id, Patient patient){
+    public String update(int id, Patient patient) throws JsonProcessingException {
         Optional<Patient> opt = patientRepository.findById(id);
 
         if(opt.isPresent()){
             patient.setId(opt.get().getId());
             patientRepository.save(patient);
-            return "patient updated";
+            ObjectMapper mapper = new ObjectMapper();
+            String response = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(opt.get());
+            return response;
         }else {
             return "patient not found";
         }

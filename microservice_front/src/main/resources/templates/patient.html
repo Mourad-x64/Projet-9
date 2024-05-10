@@ -10,21 +10,65 @@
 </head>
 <body>
 
-<div class="row col-md-8 offset-md-2">
+<div class="container">
+    <div class="row" th:if="${param.error}">
+        <h2>Error patient not saved !</h2>
+    </div>
+    <div class="row">
+        <h2>Update patient</h2>
+    </div>
 
-    <div class="container border mt-5">
-        <a th:href="@{/patient/}"> <- Back </a>
-        <div class="container mt-5 mb-5">
+    <div class="row">
+        <form action="#" th:action="@{/patient/{id}(id=${patient.id})}" th:object="${patient}" ModelAttribute="patient" method="post" class="form-horizontal" style="width: 100%">
+            <div class="form-group">
+                <label for="prenom" class="col-sm-2 control-label">Firstname</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.prenom}" id="prenom" placeholder="Firstname" class="col-4" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nom" class="col-sm-2 control-label">Lastname</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.nom}" id="nom" placeholder="Lastname" class="col-4" required>
 
-        <h4>Lastname : <span th:text="${patient.nom}"></span></h4>
-        <h4>Firstname : <span th:text="${patient.prenom}"></span></h4>
-        <h4>Gender : <span th:text="${patient.genre}"></span></h4>
-        <h4>Date Of Birth : <span th:text="${patient.dateNaissance}"></span></h4>
-        <h4>Adress : <span th:text="${patient.adresse}"></span></h4>
-        <h4>Phone : <span th:text="${patient.telephone}"></span></h4>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre" class="col-sm-2 control-label">Gender</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.genre}" id="genre" placeholder="Gender" class="col-4" required>
 
-        </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateNaissance" class="col-sm-2 control-label">Date of Birth</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.dateNaissance}" id="dateNaissance" placeholder="Date of Birth" class="col-4" required>
 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="adresse" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.adresse}" id="adresse" placeholder="Address" class="col-4">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telephone" class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-10">
+                    <input type="text" th:value="${patient.telephone}" id="telephone" placeholder="Phone" class="col-4">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <a class="btn btn-danger btn-sm" th:href="@{/patient/}">Cancel</a>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Update patient">
+                </div>
+            </div>
+        </form>
     </div>
 
 </div>
