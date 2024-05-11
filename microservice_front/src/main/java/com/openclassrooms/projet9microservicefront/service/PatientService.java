@@ -16,23 +16,23 @@ public class PatientService {
 
     public List<Patient> getAllPatients(){
         RestTemplate restTemplate = new RestTemplate();
-        Patient[] patients = restTemplate.getForObject(Uri.ALL_PATIENTS, Patient[].class);
+        Patient[] response = restTemplate.getForObject(Uri.ALL_PATIENTS, Patient[].class);
 
-        return Arrays.asList(patients);
+        return Arrays.asList(response);
     }
 
     public Object getPatient(int id){
         RestTemplate restTemplate = new RestTemplate();
-        Object patient = restTemplate.getForObject(Uri.GET_PATIENT+id, Patient.class);
+        Object response = restTemplate.getForObject(Uri.GET_PATIENT+id, Patient.class);
 
-        return patient;
+        return response;
     }
 
     public Object addPatient(Patient patient){
         RestTemplate restTemplate = new RestTemplate();
         Patient response = restTemplate.postForObject(Uri.ADD_PATIENT, patient, Patient.class);
 
-        return patient;
+        return response;
     }
 
     public void updatePatient(int id, Patient patient){

@@ -7,5 +7,4 @@ public class Uri {
     public static final String UPDATE_PATIENT = "http://localhost:8080/patient/update/";
     public static final String DELETE_PATIENT = "http://localhost:8080/patient/delete/";
 
-
 }
