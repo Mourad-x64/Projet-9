@@ -18,6 +18,12 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+    @GetMapping("/login")
+    String login() {
+
+        return "login";
+    }
+
 
     @GetMapping("/")
     public String getAllPatients(Model model){
