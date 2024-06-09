@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Patient</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h2>patient form</h2>
+    </div>
+
+    <div class="row">
+        <form action="#"  th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="prenom" class="col-sm-2 control-label">Firstname</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{prenom}"  id="prenom" placeholder="Firstname" class="col-4" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nom" class="col-sm-2 control-label">Lastname</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{nom}"  id="nom" placeholder="Lastname" class="col-4" required>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre" class="col-sm-2 control-label">Gender</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{genre}"  id="genre" placeholder="Gender" class="col-4" required>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateNaissance" class="col-sm-2 control-label">Date of Birth</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{dateNaissance}"  id="dateNaissance" placeholder="Date of Birth" class="col-4" required>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="adresse" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{adresse}"  id="adresse" placeholder="Address" class="col-4">
+
+                </div>
+            </div>
+            <div class="form-group mb-5">
+                <label for="telephone" class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{telephone}"  id="telephone" placeholder="Phone" class="col-4">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <a class="btn btn-danger btn-sm" th:href="@{/patient/}">Cancel</a>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Submit patient">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

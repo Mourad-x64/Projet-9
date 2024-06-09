@@ -35,6 +35,7 @@
                     <th>Lastname</th>
                     <th>Firstname</th>
                     <th>Gender</th>
+                    <th>Infos</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -44,6 +45,7 @@
                     <td th:text="${patient.nom}"></td>
                     <td th:text="${patient.prenom}"></td>
                     <td th:text="${patient.genre}"></td>
+                    <td align="right"><a th:href="@{/patient/{id}(id = ${patient.id})}">Infos</a></td>
                     <td align="right"><a th:href="@{/patient/edit/{id}(id = ${patient.id})}">Edit</a></td>
                     <td align="right"><a th:href="@{/patient/delete/{id}(id = ${patient.id})}">Delete</a></td>
                 </tr>
@@ -53,6 +55,7 @@
                     <th>Lastname</th>
                     <th>Firstname</th>
                     <th>Gender</th>
+                    <th>Infos</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>

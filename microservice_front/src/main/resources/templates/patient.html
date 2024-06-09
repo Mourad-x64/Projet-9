@@ -4,72 +4,116 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Patient</title>
+    <title>Patient infos</title>
     <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Data Table CSS -->
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
 </head>
 <body>
 
 <div class="container">
-    <div class="row">
-        <h2>patient form</h2>
+    <div class="row mb-5">
+        <h4>patient infos  <a  th:href="@{/patient/}"><- back</a></h4>
     </div>
 
     <div class="row">
-        <form action="#" th:action="@{/patient/add}" th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
-            <input type="hidden" th:field="*{id}">
-            <div class="form-group">
-                <label for="prenom" class="col-sm-2 control-label">Firstname</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{prenom}"  id="prenom" placeholder="Firstname" class="col-4" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="nom" class="col-sm-2 control-label">Lastname</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{nom}"  id="nom" placeholder="Lastname" class="col-4" required>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="genre" class="col-sm-2 control-label">Gender</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{genre}"  id="genre" placeholder="Gender" class="col-4" required>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="dateNaissance" class="col-sm-2 control-label">Date of Birth</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{dateNaissance}"  id="dateNaissance" placeholder="Date of Birth" class="col-4" required>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="adresse" class="col-sm-2 control-label">Address</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{adresse}"  id="adresse" placeholder="Address" class="col-4">
-
-                </div>
-            </div>
-            <div class="form-group mb-5">
-                <label for="telephone" class="col-sm-2 control-label">Phone</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{telephone}"  id="telephone" placeholder="Phone" class="col-4">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <a class="btn btn-danger btn-sm" th:href="@{/patient/}">Cancel</a>
-                    <input class="btn btn-primary btn-sm" type="submit" value="Submit patient">
-                </div>
-            </div>
-        </form>
+        <h3>NOM : <span th:text="${patient.nom}"></span></h3>
+    </div>
+    <div class="row">
+        <h3>PRENOM : <span th:text="${patient.prenom}"></span></h3>
+    </div>
+    <div class="row">
+        <h3>DATE NAISSANCE : <span th:text="${patient.dateNaissance}"></span></h3>
+    </div>
+    <div class="row">
+        <h3>GENRE : <span th:text="${patient.genre}"></span></h3>
+    </div>
+    <div class="row">
+        <h3>ADRESSE : <span th:text="${patient.adresse}"></span></h3>
+    </div>
+    <div class="row">
+        <h3>TELEPHONE : <span th:text="${patient.telephone}"></span></h3>
     </div>
 
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <h4>Notes  <a  th:href="@{/note/add}">Add note</a></h4>
+    </div>
+    <div  class="container mt-5" th:if="${not#lists.isEmpty(notes)}">
+        <table id="friends" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Patient id</th>
+                <th>Note</th>
+                <th>Date</th>
+                <th>Infos</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="note : ${notes}">
+                <td th:text="${note.patientId}"></td>
+                <td th:text="${note.note}"></td>
+                <td th:text="${note.date}"></td>
+                <td align="right"><a th:href="@{/note/{id}(id = ${note.id})}">Infos</a></td>
+                <td align="right"><a th:href="@{/note/edit/{id}(id = ${note.id})}">Edit</a></td>
+                <td align="right"><a th:href="@{/note/delete/{id}(id = ${note.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Patient id</th>
+                <th>Note</th>
+                <th>Date</th>
+                <th>Infos</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+<!-- Custom js -->
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#friends').DataTable({
+      language: {
+        //customize pagination prev and next buttons: use arrows instead of words
+        'paginate': {
+          'previous': '<span class="fa fa-chevron-left"></span>',
+          'next': '<span class="fa fa-chevron-right"></span>'
+        },
+        //customize number of elements to be displayed
+        "lengthMenu": 'Display <select class="form-control input-sm">'+
+        '<option value="10">10</option>'+
+        '<option value="20">20</option>'+
+        '<option value="30">30</option>'+
+        '<option value="40">40</option>'+
+        '<option value="50">50</option>'+
+        '<option value="-1">All</option>'+
+        '</select> results'
+      }
+    })
+} );
+</script>
 
 </body>
 </html>

@@ -1,52 +1,49 @@
 package com.openclassrooms.projet9microservicefront.service;
 
-
+import com.openclassrooms.projet9microservicefront.model.Note;
 import com.openclassrooms.projet9microservicefront.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
-
 import java.util.Arrays;
 import java.util.List;
 
-
 @Service
-public class PatientService {
+public class NoteService {
 
     @Autowired
     PropertyLoader propertyLoader;
 
-    public List<Patient> getAllPatients(){
+    public List<Note> getAllNotes(int id){
         RestTemplate restTemplate = new RestTemplate();
-        Patient[] response = restTemplate.getForObject(propertyLoader.getProperty("PATIENT_URI"), Patient[].class);
+        Note[] response = restTemplate.getForObject(propertyLoader.getProperty("NOTE_URI")+"patient/"+id, Note[].class);
 
         return Arrays.asList(response);
     }
 
 
-    public Object getPatient(int id){
+    public Note getNote(String id) {
         RestTemplate restTemplate = new RestTemplate();
-        Object response = restTemplate.getForObject(propertyLoader.getProperty("PATIENT_URI")+"get/"+id, Patient.class);
+        Note response = restTemplate.getForObject(propertyLoader.getProperty("NOTE_URI")+id, Note.class);
 
         return response;
     }
 
-    public Object addPatient(Patient patient){
+    public Note addNote(Note note) {
         RestTemplate restTemplate = new RestTemplate();
-        Patient response = restTemplate.postForObject(propertyLoader.getProperty("PATIENT_URI")+"add", patient, Patient.class);
+        Note response = restTemplate.postForObject(propertyLoader.getProperty("NOTE_URI")+"add", note, Note.class);
 
         return response;
     }
 
-    public void updatePatient(int id, Patient patient){
+    public void updateNote(String id, Note note){
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(propertyLoader.getProperty("PATIENT_URI")+"update/"+id, patient);
+        restTemplate.put(propertyLoader.getProperty("NOTE_URI")+"update/"+id, note);
     }
 
-    public void deletePatient(int id){
+    public void deleteNote(String id){
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(propertyLoader.getProperty("PATIENT_URI")+"delete/"+id);
+        restTemplate.delete(propertyLoader.getProperty("NOTE_URI")+"delete/"+id);
     }
 }

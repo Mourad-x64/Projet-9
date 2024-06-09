@@ -3,6 +3,7 @@ package com.openclassrooms.projet9microservicefront.controller;
 
 
 import com.openclassrooms.projet9microservicefront.model.Patient;
+import com.openclassrooms.projet9microservicefront.service.NoteService;
 import com.openclassrooms.projet9microservicefront.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+    @Autowired
+    NoteService noteService;
+
     @GetMapping("/login")
     String login() {
 
@@ -32,10 +36,18 @@ public class PatientController {
         return "patients_list";
     }
 
+    @GetMapping("/{id}")
+    public String getPatient(@PathVariable int id, Model model){
+        model.addAttribute("patient", patientService.getPatient(id));
+        model.addAttribute("notes", noteService.getAllNotes(id));
+
+        return "patient";
+    }
+
     @GetMapping("/add")
     public String addPatientForm(Model model) {
         model.addAttribute("patient", new Patient());
-        return "patient";
+        return "patient_form";
     }
 
     @PostMapping("/add")
@@ -48,7 +60,7 @@ public class PatientController {
     public String updatePatientForm(@PathVariable int id, Model model){
         model.addAttribute("patient", patientService.getPatient(id));
 
-        return "patient";
+        return "patient_form";
     }
 
     @PostMapping("edit/{id}")
