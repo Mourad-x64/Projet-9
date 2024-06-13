@@ -27,13 +27,7 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public MapReactiveUserDetailsService userDetailsService() {
 
-        UserDetails user = User.withUsername("user").password(passwordEncoder().encode("user")).build();
-
-        return new MapReactiveUserDetailsService(user);
-    }
 
     @Bean
     public ServerAuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -62,6 +56,14 @@ public class SecurityConfiguration {
 
 
         return http.build();
+    }
+
+    @Bean
+    public MapReactiveUserDetailsService userDetailsService() {
+
+        UserDetails user = User.withUsername("user").password(passwordEncoder().encode("user")).build();
+
+        return new MapReactiveUserDetailsService(user);
     }
 
 
