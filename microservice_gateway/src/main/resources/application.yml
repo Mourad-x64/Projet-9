@@ -5,13 +5,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: microservicepatient
-          uri: http://localhost:8081/
-          predicates:
-          - Path=/patient/**
         - id: routefront
-          uri: http://localhost:8082/
+          uri: http://localhost:8082
           predicates:
           - Path=/ui/**
+
 
 

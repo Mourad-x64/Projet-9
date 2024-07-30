@@ -1,4 +1,4 @@
-package config;
+package com.openclassrooms.projet9microservicegateway.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 })
                 .logout(
                         Customizer.withDefaults()
-                ).csrf(ServerHttpSecurity.CsrfSpec::disable).build();
+                ).csrf(ServerHttpSecurity.CsrfSpec::disable);
 
 
         return http.build();
