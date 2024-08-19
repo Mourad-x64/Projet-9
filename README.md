@@ -1,5 +1,5 @@
 
-![](images/16915753889047_fr_DA-JAVA_P7-P8-P9_P9-02 (1) Large.jpeg)
+![](images/medilabo.jpeg)
 
 # Médialbo Solutions
 Projet 9 java OpenClassRooms, le but de ce projet est de créer une application de gestion des patients avec la prise en compte 
