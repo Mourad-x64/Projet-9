@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: routefront
+          uri: http://host.docker.internal:8082
+          predicates:
+          - Path=/ui/**
+
+
+

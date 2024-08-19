@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>openclassrooms</groupId>
 	<artifactId>projet9MicroservicePatient</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>projet9MicroservicePatient</name>
 	<description>Projet 9 openclassrooms microservice patient</description>
 	<properties>

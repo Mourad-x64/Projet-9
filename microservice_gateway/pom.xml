@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.openclassrooms</groupId>
 	<artifactId>projet9microservicegateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>projet9microservicegateway</name>
 	<description>Projet 9 microservice gateway</description>
 	<properties>

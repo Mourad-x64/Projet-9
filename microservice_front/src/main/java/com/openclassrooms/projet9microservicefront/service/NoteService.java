@@ -3,6 +3,7 @@ package com.openclassrooms.projet9microservicefront.service;
 import com.openclassrooms.projet9microservicefront.model.Note;
 import com.openclassrooms.projet9microservicefront.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,12 +13,13 @@ import java.util.List;
 @Service
 public class NoteService {
 
-    @Autowired
-    PropertyLoader propertyLoader;
+
+    @Value("${NOTE_URI}")
+    String noteUri;
 
     public List<Note> getAllNotes(int id){
         RestTemplate restTemplate = new RestTemplate();
-        Note[] response = restTemplate.getForObject(propertyLoader.getProperty("NOTE_URI")+"patient/"+id, Note[].class);
+        Note[] response = restTemplate.getForObject(noteUri+"/patient/"+id, Note[].class);
 
         return Arrays.asList(response);
     }
@@ -25,25 +27,25 @@ public class NoteService {
 
     public Note getNote(String id) {
         RestTemplate restTemplate = new RestTemplate();
-        Note response = restTemplate.getForObject(propertyLoader.getProperty("NOTE_URI")+id, Note.class);
+        Note response = restTemplate.getForObject(noteUri+"/"+id, Note.class);
 
         return response;
     }
 
     public Note addNote(Note note) {
         RestTemplate restTemplate = new RestTemplate();
-        Note response = restTemplate.postForObject(propertyLoader.getProperty("NOTE_URI")+"add", note, Note.class);
+        Note response = restTemplate.postForObject(noteUri+"/add", note, Note.class);
 
         return response;
     }
 
     public void updateNote(String id, Note note){
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(propertyLoader.getProperty("NOTE_URI")+"update/"+id, note);
+        restTemplate.put(noteUri+"/update/"+id, note);
     }
 
     public void deleteNote(String id){
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(propertyLoader.getProperty("NOTE_URI")+"delete/"+id);
+        restTemplate.delete(noteUri+"/delete/"+id);
     }
 }

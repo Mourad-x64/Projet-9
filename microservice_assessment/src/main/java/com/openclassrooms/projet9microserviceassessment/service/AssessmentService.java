@@ -3,6 +3,7 @@ package com.openclassrooms.projet9microserviceassessment.service;
 import com.openclassrooms.projet9microserviceassessment.model.Note;
 import com.openclassrooms.projet9microserviceassessment.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,15 +15,18 @@ import java.util.List;
 @Service
 public class AssessmentService {
 
-    @Autowired
-    PropertyLoader propertyLoader;
+
+    @Value("${PATIENT_URI}")
+    String patientUri;
+    @Value("${NOTE_URI}")
+    String noteUri;
 
     public String getAssessment(int id){
 
         RestTemplate restTemplate = new RestTemplate();
-        Patient patient = restTemplate.getForObject(propertyLoader.getProperty("PATIENT_URI")+"get/"+id, Patient.class);
+        Patient patient = restTemplate.getForObject(patientUri+"/get/"+id, Patient.class);
 
-        Note[] response = restTemplate.getForObject(propertyLoader.getProperty("NOTE_URI")+"patient/"+id, Note[].class);
+        Note[] response = restTemplate.getForObject(noteUri+"/patient/"+id, Note[].class);
         List<Note> notes;
         notes = Arrays.asList(response);
 
