@@ -43,3 +43,12 @@ pour la base de donnée Mysql et Mongodb nous utilisons des variables d'environn
 - lancez les fichiers build.sh dans chaque microservice
 - lancez la commande : "docker compose up" au même endroit que le fichier docker-compose.yml 
 - accédez à : localhost:8080/ui/patient/
+
+
+### green code
+pour améliorer ce projet en terme de green code on peut effectuer un profilage des performances du code avec un outil 
+comme jmeter.Pour identifier les partie du code couteuses en resources.
+Repérez les parties du code qui sont redondantes, mal optimisées ou inutiles, comme des boucles inutiles, 
+des appels de fonctions superflus ou des opérations I/O répétitives.
+Examinez les requêtes réseau ou les appels à la base de données pour identifier les transferts de données superflus 
+ou les requêtes non optimisées.
