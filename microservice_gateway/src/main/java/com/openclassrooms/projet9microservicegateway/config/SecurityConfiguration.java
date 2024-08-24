@@ -42,6 +42,9 @@ public class SecurityConfiguration {
 
         http.authorizeExchange((authorize) ->
                         authorize
+                                //.pathMatchers("/patient/**").permitAll()
+                                //.pathMatchers("/notes/**").permitAll()
+                                //.pathMatchers("/assessment/**").permitAll()
                                 .anyExchange().authenticated()
 
 

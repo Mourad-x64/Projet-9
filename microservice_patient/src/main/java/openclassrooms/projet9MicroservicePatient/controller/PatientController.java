@@ -21,8 +21,11 @@ public class PatientController {
     }
 
     @GetMapping("/get/{id}")
-    public String get(@PathVariable("id") int id) throws JsonProcessingException {
-        return patientService.get(id);
+    public Patient get(@PathVariable("id") int id) throws Exception {
+
+            Patient patient = patientService.get(id);
+            return patient;
+
     }
 
     @PostMapping("/add")

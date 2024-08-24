@@ -51,15 +51,15 @@ public class PatientService {
         return "patient deleted";
     }
 
-    public String get(int id) throws JsonProcessingException {
+    public Patient get(int id) throws Exception {
         Optional<Patient> opt = patientRepository.findById(id);
 
         if(opt.isPresent()){
-            ObjectMapper mapper = new ObjectMapper();
-            String patient = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(opt.get());
-            return patient;
+
+             return opt.get();
+
         }else {
-            return "invalid patient id";
+            throw(new Exception("invalid patient."));
         }
     }
 }

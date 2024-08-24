@@ -2,9 +2,18 @@ package com.openclassrooms.projet9microserviceassessment.service;
 
 import com.openclassrooms.projet9microserviceassessment.model.Note;
 import com.openclassrooms.projet9microserviceassessment.model.Patient;
+import com.openclassrooms.projet9microserviceassessment.proxies.NotesProxy;
+import com.openclassrooms.projet9microserviceassessment.proxies.PatientProxy;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -21,14 +30,30 @@ public class AssessmentService {
     @Value("${NOTE_URI}")
     String noteUri;
 
+    @Autowired
+    PatientProxy patientProxy;
+    @Autowired
+    NotesProxy notesProxy;
+
+    @Bean
+    RestOperations restTemplateBuilder(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.basicAuthentication("user", "user").build();
+    }
+
     public String getAssessment(int id){
 
-        RestTemplate restTemplate = new RestTemplate();
-        Patient patient = restTemplate.getForObject(patientUri+"/get/"+id, Patient.class);
 
-        Note[] response = restTemplate.getForObject(noteUri+"/patient/"+id, Note[].class);
-        List<Note> notes;
-        notes = Arrays.asList(response);
+
+        //RestTemplate restTemplate = new RestTemplate();
+        //Patient patient = restTemplate.getForObject(patientUri+"/get/"+id, Patient.class);
+
+        Patient patient = patientProxy.getPatient(id);
+
+        //Note[] response = restTemplate.getForObject(noteUri+"/patient/"+id, Note[].class);
+        //List<Note> notes;
+        //notes = Arrays.asList(response);
+
+        List<Note> notes = notesProxy.getNotes(id);
 
         LocalDate dateOfBirth = LocalDate.parse(patient.getDateNaissance());
         LocalDate now = LocalDate.now();

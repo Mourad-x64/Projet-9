@@ -9,6 +9,18 @@ spring:
           uri: http://localhost:8082
           predicates:
           - Path=/ui/**
+        - id: patient
+          uri: http://localhost:8081
+          predicates:
+            - Path=/patient/**
+        - id: notes
+          uri: http://localhost:8083
+          predicates:
+            - Path=/notes/**
+        - id: assessment
+          uri: http://localhost:8084
+          predicates:
+            - Path=/assessment/**
 
 
 

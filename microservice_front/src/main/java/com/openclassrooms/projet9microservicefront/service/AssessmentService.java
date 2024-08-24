@@ -1,6 +1,7 @@
 package com.openclassrooms.projet9microservicefront.service;
 
 import com.openclassrooms.projet9microservicefront.model.Note;
+import com.openclassrooms.projet9microservicefront.proxies.AssessmentProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,15 @@ public class AssessmentService {
     @Value("${ASSESSMENT_URI}")
     String assessmentUri;
 
-    public String getAssessment(int id){
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(assessmentUri+"/"+id, String.class);
+    @Autowired
+    AssessmentProxy assessmentProxy;
 
-        return response;
+    public String getAssessment(int id){
+        //RestTemplate restTemplate = new RestTemplate();
+        //String response = restTemplate.getForObject(assessmentUri+"/"+id, String.class);
+
+        //return response;
+
+        return assessmentProxy.getAssessment(id);
     }
 }

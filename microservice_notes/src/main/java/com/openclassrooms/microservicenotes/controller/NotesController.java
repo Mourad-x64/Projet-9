@@ -15,7 +15,7 @@ public class NotesController {
     @Autowired
     NotesService notesService;
 
-    @GetMapping("patient/{patientId}")
+    @GetMapping("/patient/{patientId}")
     public List<Note> getNotes(@PathVariable("patientId") int patientId){
         return notesService.getNotes(patientId);
     }
