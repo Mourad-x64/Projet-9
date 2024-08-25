@@ -35,23 +35,16 @@ public class AssessmentService {
     @Autowired
     NotesProxy notesProxy;
 
-    @Bean
-    RestOperations restTemplateBuilder(RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder.basicAuthentication("user", "user").build();
-    }
+
 
     public String getAssessment(int id){
 
 
 
-        //RestTemplate restTemplate = new RestTemplate();
-        //Patient patient = restTemplate.getForObject(patientUri+"/get/"+id, Patient.class);
 
         Patient patient = patientProxy.getPatient(id);
 
-        //Note[] response = restTemplate.getForObject(noteUri+"/patient/"+id, Note[].class);
-        //List<Note> notes;
-        //notes = Arrays.asList(response);
+
 
         List<Note> notes = notesProxy.getNotes(id);
 
